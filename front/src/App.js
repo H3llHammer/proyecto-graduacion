@@ -1,0 +1,58 @@
+import { React } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./style.css";
+
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import Graduados from "./pages/Graduados";
+import Calendario from "./pages/Calendario";
+import Boletos from "./pages/Boletos";
+import Mesas from "./pages/Mesas";
+import Footer from "./components/Footer";
+
+
+const App = () =>
+{
+    return(
+        <div className="App">
+            <Router>
+                <Nav/>
+                <div className="background">
+                    <Switch>
+                        <div className="container">
+                            <Route exact path="/">
+                                <Home/>
+                            </Route>
+                            <Route exact path="/lista-de-graduados">
+                                <Graduados/>
+                            </Route>
+                            <Route exact path="/calendario">
+                                <Calendario/>
+                            </Route>
+                            <Route exact path="/venta-de-boletos">
+                                <Boletos/>
+                            </Route>
+                            <Route exact path="/mesa-y-lugares">
+                                <Mesas/>
+                            </Route>
+                        </div>
+                    </Switch>
+                </div>
+                <Footer/>
+            </Router>
+        </div>
+    )
+};
+
+export default App;
+
+/*
+    useEffect(() => {
+        for(let i = 0;i<100;i++)
+        {
+            render(
+                <p className="frame">{i}</p>
+            )
+        }
+    });
+    */
