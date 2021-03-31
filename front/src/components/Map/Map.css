@@ -7,6 +7,7 @@
 
 .container{
     display: flex;
+    flex-direction: row;
 }
 
 .container-column
@@ -24,7 +25,7 @@
 .frame-1
 {
     display: flex;
-    width: 330px;
+    width: 165px;
     padding: 5px 0 5px 0;  
     justify-content: center;
     align-items: center ;
@@ -34,8 +35,8 @@
 .frame-2
 {
     display: flex;
-    width: 220px; 
-    height: 281px; 
+    width: 120px; 
+    height: 157px; 
     justify-content: center;
     align-items: center ;
     background-color: rgb(170, 185, 34);
@@ -43,8 +44,8 @@
 
 .button {
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background-color: red;
     text-align: center;
