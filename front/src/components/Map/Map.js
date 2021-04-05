@@ -1,21 +1,26 @@
 import React from "react";
 import "./Map.css";
+import axios from "axios";
 
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { counter: 1, M: [] };
+    this.state = { mesa: [] };
   }
 
   componentDidMount() {
-    let Mesas = [];
-    let index = 1;
-    for (let i = 1; i <= 120; i++) {
-      Mesas.push({ id: index, active: true });
-      index = index + 1;
-      console.log(this.state.counter);
-    }
-    this.setState({ M: Mesas });
+    
+  }
+
+  async getMesa(e, id)
+  {
+    e.preventDefault();
+    await axios.get(`http://localhost:4000/mesas/1`)
+    .then(res => {
+      const mesa = res.data;
+      console.log(mesa);
+      this.setState({ mesa });
+    })
   }
 
   render() {
@@ -26,7 +31,7 @@ export default class Map extends React.Component {
           <div className="container-column d-flex">
             <div className="container-row">
               <div className="button btn" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">1</div>
+                data-bs-target="#staticBackdrop" onClick={(e) => {this.getMesa(e, 1)}}>1</div>
               <div className="button btn" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">2</div>
               <div className="button btn" data-bs-toggle="modal"
@@ -329,15 +334,18 @@ export default class Map extends React.Component {
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Mesa {this.state.mesa.map((item, i) => (item.id))}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                   aria-label="Close"></button>
               </div>
-              <div class="modal-body">...</div>
+              <div class="modal-body">
+                <p>Total de asientos: {this.state.mesa.map((item, i) => (item.total))}</p>
+                <p>Asientos disponibles: {this.state.mesa.map((item, i) => (item.disponibles))}</p>
+                </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary">
-                  Understood
+                  Reservar
                 </button>
               </div>
             </div>
