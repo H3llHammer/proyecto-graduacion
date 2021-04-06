@@ -22,7 +22,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="main-container">
-        <div className="frame-1">Hotel</div>
+        <div className="frame-1">Hotel Buenavista</div>
         <div className="container d-flex">
           <div className="container-column d-flex">
             <div className="container-row">
