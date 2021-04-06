@@ -6,7 +6,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Graduados from "./pages/Graduados";
 import Calendario from "./pages/Calendario";
-import Boletos from "./pages/Boletos";
+import About from "./pages/About";
 import Mesas from "./pages/Mesas";
 import Footer from "./components/Footer";
 
@@ -29,11 +29,11 @@ const App = () =>
                             <Route exact path="/calendario">
                                 <Calendario/>
                             </Route>
-                            <Route exact path="/venta-de-boletos">
-                                <Boletos/>
-                            </Route>
                             <Route exact path="/mesa-y-lugares">
                                 <Mesas/>
+                            </Route>
+                            <Route exact path="/about">
+                                <About/>
                             </Route>
                         </div>
                     </Switch>

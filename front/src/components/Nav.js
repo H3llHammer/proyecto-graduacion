@@ -18,12 +18,12 @@ const Nav = () =>{
             path: "/calendario"
         },
         {
-            title: "Venta de Boletos",
-            path: "/venta-de-boletos"
-        },
-        {
             title: "Mesa y Lugares",
             path: "/mesa-y-lugares"
+        },
+        {
+            title: "Acerca de",
+            path: "/about"
         }
     ]
 
