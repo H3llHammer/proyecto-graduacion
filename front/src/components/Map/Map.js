@@ -5,7 +5,7 @@ import axios from "axios";
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { mesa: [] };
+    this.state = { mesa: [], disp: 0 };
   }
 
   componentDidMount() {}
@@ -14,7 +14,7 @@ export default class Map extends React.Component {
     e.preventDefault();
     await axios.get(`http://localhost:4000/mesas/120`).then((res) => {
       const mesa = res.data;
-      console.log(mesa);
+      this.setState({disp: mesa[0].disponibles});
       this.setState({ mesa });
     });
   }
@@ -952,15 +952,16 @@ export default class Map extends React.Component {
                   Asientos disponibles:{" "}
                   {this.state.mesa.map((item, i) => item.disponibles)}
                 </p>
-                <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                <select class=form-select"" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value=1"">One</option>
-                <option value="2">Two/option><
-                <option value="3">Three</option>
+                <div class="input-group">
+                  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                  <option selected>Choose...</option>
+                  {Array.apply(0, Array(this.state.disp)).map(function (x, i) {
+                    return <option value={x} key={i}>{i+1}</option>
+                 })}
                 </select>
-                </div>
+                <button class="btn btn-outline-secondary" type="button">Button</button>
+              </div>
+
               </div>
               <div class="modal-footer">
                 <button
