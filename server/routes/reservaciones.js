@@ -12,7 +12,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    mysqlConn.query("SELECT * FROM reservaciones;", (err, rows, fields) => {
+    mysqlConn.query("SELECT * FROM reservaciones R JOIN usuarios U ON R.ID_usuario = U.ID_usuario;", (err, rows, fields) => {
         if(!err) res.json(rows);
         else console.log(err);
     });
