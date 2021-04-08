@@ -17,7 +17,6 @@ const App = () =>
         <div className="App">
             <Router>
                 <Nav/>
-                <div className="background">
                     <Switch>
                         <div className="container">
                             <Route exact path="/">
@@ -37,7 +36,6 @@ const App = () =>
                             </Route>
                         </div>
                     </Switch>
-                </div>
                 <Footer/>
             </Router>
         </div>

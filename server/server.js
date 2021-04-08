@@ -1,40 +1,38 @@
 const express = require("express");
 const app = express();
-const mysqlConn = require("./database");
 const cors = require("cors");
+const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const bodyParser = require("body-parser");
 
 app.set("port", process.env.port || 4000);
 
+// Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  })
+);
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./passportConfig")(passport);
 
-app.get("/mesas", (req, res) => {
-  mysqlConn.query("SELECT * FROM mesas", (err, rows, fields) => {
-    if (!err) res.json(rows);
-    else console.log(err);
-  });
-});
-
-app.get("/mesas/:id", (req, res) => {
-  const id = req.params.id;
-  const query = "SELECT * FROM mesas WHERE id = ?";
-  mysqlConn.query(query, [id], (err, rows, fields) => {
-    if (!err) res.json(rows);
-    else console.log(err);
-  });
-});
-
-app.post("/mesas/add", (req, res) => {
-  const { total, disponibles } = req.body;
-  console.log(total, disponibles);
-  for (let i = 2; i <= 120; i++) {
-    const query = "INSERT INTO mesas (total, disponibles) VALUES (?, ?)";
-    mysqlConn.query(query, [total, disponibles], (err, rows, fields) => {
-      if (!err) console.log("Mesa agregada");
-      else console.log(err);
-    });
-  }
-});
+// Rutas
+app.use(require("./routes/login"));
+app.use("/mesas", require("./routes/mesas"));
+app.use("/reservaciones", require("./routes/reservaciones"));
 
 app.listen(app.get("port"), () => {
   console.log(`Servidor ejecutandose en el puerto ${app.get("port")}`);
