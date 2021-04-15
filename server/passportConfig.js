@@ -28,7 +28,7 @@ module.exports = function (passport) {
             if (result === true) {
               return done(null, user);
             } else {
-              return done(null, false);
+              return console.log("error")//done(null, false);
             }
           });*/
           //return done(null, user[0]);
@@ -45,7 +45,7 @@ module.exports = function (passport) {
         if (res === true) {
           return done(null, user);
         } else {
-          return done(null, user);
+          return done(err);
         }
       });
     });
@@ -64,7 +64,6 @@ module.exports = function (passport) {
         const userInformation = {
           username: user[0].Username,
         };
-        //console.log(user[0].Username);
         done(null, userInformation);
       }
     );

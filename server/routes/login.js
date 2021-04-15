@@ -21,12 +21,15 @@ router.post("/login",checkNotAuthenticated ,(req, res, next) => {
 });
 
 router.post("/register", checkNotAuthenticated, async (req, res) => {
+  const { username, password } = req.body;
+  if(username === "" && password === "")
+    throw err;
   const query =
     "INSERT INTO usuarios (Nombres,Apellidos,Username,Password) SELECT * FROM (SELECT '' AS Nombres, '' AS Apellidos, ? AS Username, ? AS Password) AS tmp WHERE NOT EXISTS (SELECT Username FROM usuarios WHERE Username = ?)LIMIT 1";
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
   mysqlConn.query(
     query,
-    [req.body.username, hashedPassword, req.body.username],
+    [username, hashedPassword, username],
     (err, rows, result) => {
       if (err) {
         res.status(500).send("Ha ocurrido un error");
