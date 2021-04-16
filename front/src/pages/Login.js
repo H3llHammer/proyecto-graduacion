@@ -31,8 +31,8 @@ function Login(props) {
       withCredentials: true,
       url: "http://localhost:4000/login",
     }).then((res) => {
-      if (res.status !== 404) console.log(res);
-      //props.getUser(true)
+      if (res.status !== 404) //console.log(res);
+        props.getUser(true);
       else console.log("hola");
     });
   };

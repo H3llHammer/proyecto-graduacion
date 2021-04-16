@@ -251,7 +251,7 @@ export default function Map() {
                   <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                   <option selected value={setOpc}>Choose...</option>
                   {Array.apply(0, Array(disp)).map(function (x, i) {
-                    return <option value={x} key={i}>{i+1}</option>
+                    return <option value={x} key={i}>{i+1}</option> 
                  })}
                 </select>
                 <button class="btn btn-outline-secondary" type="submit">Button</button>
