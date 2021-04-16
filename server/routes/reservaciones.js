@@ -3,10 +3,15 @@ const router = express.Router();
 const mysqlConn = require("../database");
 
 router.post("/add", (req, res) => {
-    const { idUsuario, fecha, cantidad } = req.body;
-    mysqlConn.query("INSERT INTO reservaciones (ID_usuario,fecha,cantidad) VALUES(?,?,?);",
-    [idUsuario, fecha, cantidad], (err, rows, fields) => {
-        if(!err) res.json({ Status: "Se realizo la reservacion con exito"})
+    const { idUsuario, idMesa, fecha, cantidad } = req.body;
+    mysqlConn.query("INSERT INTO reservaciones (ID_usuario,ID_mesa,fecha,cantidad) VALUES(?,?,?,?);",
+    [idUsuario, idMesa, fecha, cantidad], (err, rows, fields) => {
+        if(err) console.log(err);//res.json({ Status: "Se realizo la reservacion con exito"})
+        //else console.log(err);
+    });
+    mysqlConn.query("CALL `graduacion`.`updateMesa`(?, ?);",
+    [idMesa, cantidad], (err, rows, fields) => {
+        if(!err) res.json("Se realizo la reservacion con exito")
         else console.log(err);
     });
 });
